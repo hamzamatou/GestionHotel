@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription Client{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Inscription Client</h1>
+
+        {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
+        
+        <div class="mb-3">
+            {{ form_label(form.email, 'Email') }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre email'}}) }}
+            {{ form_errors(form.email) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.password, 'Mot de passe') }}
+            {{ form_widget(form.password, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre mot de passe'}}) }}
+            {{ form_errors(form.password) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.nom, 'Nom') }}
+            {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre nom'}}) }}
+            {{ form_errors(form.nom) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.prenom, 'Prénom') }}
+            {{ form_widget(form.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre prénom'}}) }}
+            {{ form_errors(form.prenom) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.tel, 'Numéro de téléphone') }}
+            {{ form_widget(form.tel, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre numéro de téléphone'}}) }}
+            {{ form_errors(form.tel) }}
+        </div>
+
+        
+
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">S'inscrire</button>
+        </div>
+
+        {{ form_end(form) }}
+
+        <p class="text-center mt-3">Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Se connecter</a></p>
+    </div>
+{% endblock %}
