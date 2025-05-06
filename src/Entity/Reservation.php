@@ -103,13 +103,14 @@ class Reservation
         return ReservationEtat::from($this->resevEtat);
     }
 
-    public function setResevEtat(ReservationEtat|string $resevEtat): static
+    public function setResevEtat(ReservationEtat|string $resevEtat): self
     {
-        if (is_string($resevEtat)) {
-            $resevEtat = ReservationEtat::tryFrom($resevEtat) ?? throw new \InvalidArgumentException('État de réservation invalide');
+        if ($resevEtat instanceof ReservationEtat) {
+            $this->resevEtat = $resevEtat->value;
+        } else {
+            $this->resevEtat = $resevEtat;
         }
-        
-        $this->resevEtat = $resevEtat->value;
+
         return $this;
     }
 

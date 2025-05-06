@@ -16,6 +16,7 @@ use App\Entity\User;
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
 {
+    #[IsGranted('ROLE_ADMIN')]
     public function index(): Response
     {
         
@@ -57,7 +58,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Chambres', 'fas fa-hotel', Chambre::class);
         yield MenuItem::linkToCrud('Reservations', 'fas fa-hotel', Reservation::class);
         yield MenuItem::linkToCrud('Clients', 'fas fa-hotel', Client::class);
-        yield MenuItem::linkToCrud('utlisateurs', 'fas fa-hotel', User::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

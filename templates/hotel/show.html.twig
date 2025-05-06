@@ -3,7 +3,7 @@
 {% block title %}Hotel{% endblock %}
 
 {% block body %}
-    <h1>Hotel</h1>
+    <h1>{{ hotel.nom }}</h1>
 
     <table class="table">
         <tbody>
@@ -34,9 +34,36 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_hotel_index') }}">back to list</a>
+    <h3>Chambres disponibles</h3>
 
-    <a href="{{ path('app_hotel_edit', {'id': hotel.id}) }}">edit</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Numéro</th>
+                <th>État</th>
+                <th>Prix</th>
+                <th>Étage</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for chambre in chambres %}
+                <tr>
+                    <td>{{ chambre.numC }}</td>
+                    <td>{{ chambre.etat.label() }}</td>  <!-- Utilisation de la méthode label() -->
+                    <td>{{ chambre.prix }} dt</td>
+                    <td>{{ chambre.etage }}</td>
+                    <td>
+                        {% if chambre.etat.value == 'libre' %}
+                            <a href="{{ path('app_reservation_new', {'hotelId': hotel.id, 'chambreId': chambre.id}) }}" class="btn btn-primary">
+                                Réserver
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-    {{ include('hotel/_delete_form.html.twig') }}
+    <a href="{{ path('app_hotel_index') }}">Retour à la liste</a>
 {% endblock %}

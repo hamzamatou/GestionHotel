@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_Client.html.twig' %}
 
 {% block title %}Hotel index{% endblock %}
 
@@ -28,7 +28,6 @@
                 <td>{{ hotel.tel }}</td>
                 <td>
                     <a href="{{ path('app_hotel_show', {'id': hotel.id}) }}">show</a>
-                    <a href="{{ path('app_hotel_edit', {'id': hotel.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +38,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_hotel_new') }}">Create new</a>
 {% endblock %}

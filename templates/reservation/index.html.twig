@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_Client.html.twig' %}
 
 {% block title %}Reservation index{% endblock %}
 
@@ -25,7 +25,7 @@
                 <td>{{ reservation.jourArr ? reservation.jourArr|date('Y-m-d') : '' }}</td>
                 <td>{{ reservation.nbjours }}</td>
                 <td>{{ reservation.jourDep ? reservation.jourDep|date('Y-m-d') : '' }}</td>
-                <td>{{ reservation.resevEtat }}</td>
+                <td>{{ reservation.resevEtat.value }}</td>
                 <td>
                     <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}">show</a>
                     <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">edit</a>

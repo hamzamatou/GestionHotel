@@ -25,12 +25,19 @@ final class ReservationController extends AbstractController
     #[Route('/new', name: 'app_reservation_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $reservation = new Reservation();
         $form = $this->createForm(ReservationForm::class, $reservation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Mettre à jour l'état de la chambre (occupée)
+            $chambre = $reservation->getChambre();
+            $chambre->setEtat('occupée'); // Assurez-vous que l'entité Chambre a une méthode setEtat
+
+            // Persister la réservation
             $entityManager->persist($reservation);
+            $entityManager->persist($chambre); // Persister également la chambre mise à jour
             $entityManager->flush();
 
             return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
